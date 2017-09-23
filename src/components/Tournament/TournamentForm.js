@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-const TournamentForm = () => (
-  <h1>Tournaments Form</h1>
-)
+export default class TournamentForm extends Component {
+  static propTypes = {
+    id: PropTypes.string,
+  }
 
-export default TournamentForm;
+  static defaultProps = {
+    id: '',
+  }
+
+  render() {
+    const { id } = this.props;
+    return (
+      <div>
+        {
+          !id && <h1> New Tournament </h1>
+        }
+        {
+          id && <h1> Editing the tournament: {id} </h1>
+        }
+      </div>
+    )
+  }
+}
