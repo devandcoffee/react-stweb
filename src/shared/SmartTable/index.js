@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import { Button, Table } from 'antd';
 
 export const SHOW_RECORD = 'show';
@@ -66,14 +66,17 @@ class SmartTable extends Component {
 
 SmartTable.defaultProps = {
   rowKey: '',
+  pagination: {},
+  handleTableChange: () => { },
+  emit: () => { }
 };
 
 SmartTable.propTypes = {
   columns: PropTypes.array.isRequired,
   dataSource: PropTypes.array.isRequired,
-  pagination: PropTypes.object.isRequired,
-  handleTableChange: PropTypes.func.isRequired,
-  emit: PropTypes.func.isRequired,
+  pagination: PropTypes.object,
+  handleTableChange: PropTypes.func,
+  emit: PropTypes.func,
   rowKey: PropTypes.string,
 };
 
