@@ -26,11 +26,13 @@ const columns = [
   },
 ];
 
-const TournamentList = ({ data }) => {
+
+const TournamentList = ({ data, emit }) => {
   return (
     <SmartTable
       dataSource={data.tourneys ? data.tourneys : []}
       columns={columns}
+      emit={emit}
       rowKey="id"
     />
   )
@@ -42,6 +44,7 @@ TournamentList.defaultProps = {
 
 TournamentList.propTypes = {
   data: PropTypes.object,
+  emit: PropTypes.func.isRequired,
 }
 
 export default TournamentList;
