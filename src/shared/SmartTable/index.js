@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { PropTypes } from "prop-types";
-import { Button, Table } from "antd";
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+import { Button, Table } from 'antd';
 
-export const SHOW_RECORD = "show";
-export const EDIT_RECORD = "edit";
-export const REMOVE_RECORD = "remove";
+export const SHOW_RECORD = 'show';
+export const EDIT_RECORD = 'edit';
+export const REMOVE_RECORD = 'remove';
 
 const ACTIONS_OBJ = emit => ({
-  title: "Action",
-  dataIndex: "",
-  key: "x",
+  title: 'Action',
+  dataIndex: '',
+  key: 'x',
   render: (text, record, index) =>
-    <span>
+    (<span>
       <Button
         icon="search"
         onClick={() => emit(text, record, index, SHOW_RECORD)}
@@ -24,7 +24,7 @@ const ACTIONS_OBJ = emit => ({
         icon="delete"
         onClick={() => emit(text, record, index, REMOVE_RECORD)}
       />
-    </span>
+    </span>),
 });
 
 class SmartTable extends Component {
@@ -35,14 +35,14 @@ class SmartTable extends Component {
       columns: columns.concat(ACTIONS_OBJ(emit)),
       dataSource,
       rowKey,
-      pagination
+      pagination,
     };
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       dataSource: nextProps.dataSource,
-      pagination: nextProps.pagination
+      pagination: nextProps.pagination,
     });
   }
 
@@ -65,15 +65,16 @@ class SmartTable extends Component {
 }
 
 SmartTable.defaultProps = {
-  rowKey: ""
+  rowKey: '',
 };
 
 SmartTable.propTypes = {
+  columns: PropTypes.array.isRequired,
   dataSource: PropTypes.array.isRequired,
   pagination: PropTypes.object.isRequired,
   handleTableChange: PropTypes.func.isRequired,
   emit: PropTypes.func.isRequired,
-  rowKey: PropTypes.string
+  rowKey: PropTypes.string,
 };
 
 export default SmartTable;

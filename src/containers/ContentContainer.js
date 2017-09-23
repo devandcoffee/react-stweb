@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch } from 'react-router-dom';
 
 import { NotFound } from '../components';
 import HomeContainer from './HomeContainer';
@@ -11,8 +11,8 @@ import TournamentContainer from './TournamentContainer';
 const Content = () => {
   return (
     <Switch>
-      <Route exact path='/' component={HomeContainer} />
-      <Route exact path='/tournaments' component={TournamentContainer} />
+      <Route exact path="/" component={HomeContainer} />
+      <Route exact path="/tournaments" component={TournamentContainer} />
       <Route component={NotFound} />
     </Switch>
   );

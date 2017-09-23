@@ -1,14 +1,7 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
 
-export default class TeamsContainer extends Component {
-  static propTypes = {
-    prop: PropTypes
-  }
+const TeamsContainer = () => (
+  <h1> Teams List </h1>
+);
 
-  render() {
-    return (
-      <h1> Teams List </h1>
-    )
-  }
-}
+export default TeamsContainer;

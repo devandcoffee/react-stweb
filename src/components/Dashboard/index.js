@@ -7,11 +7,11 @@ const { Header, Content, Footer } = Layout;
 
 export default class Dashboard extends Component {
   static contextTypes = {
-    router: PropTypes.object
+    router: PropTypes.object,
   };
 
   static propTypes = {
-    prop: PropTypes
+    children: PropTypes.element.isRequired,
   }
 
   goTo = ({ key }) => {
@@ -43,7 +43,7 @@ export default class Dashboard extends Component {
         </Content>
         <Footer style={{ textAlign: 'center' }}>
           StWeb ©2017 Created By DevAndCoffee
-      </Footer>
+        </Footer>
       </Layout>
     )
   }

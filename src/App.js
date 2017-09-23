@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { LoginContainer, DashboardContainer } from './containers'
+import { LoginContainer, DashboardContainer } from './containers';
 
-import './App.css'
+import './App.css';
 
 class App extends Component {
   render() {

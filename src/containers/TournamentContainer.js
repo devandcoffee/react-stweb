@@ -1,15 +1,8 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { TournamentList } from '../components'
+import React from 'react';
+import { TournamentList } from '../components';
 
-export default class TournamentContainer extends Component {
-  static propTypes = {
-    prop: PropTypes
-  }
+const TournamentContainer = () => (
+  <TournamentList />
+);
 
-  render() {
-    return (
-      <TournamentList />
-    )
-  }
-}
+export default TournamentContainer;

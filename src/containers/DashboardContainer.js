@@ -1,18 +1,11 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
 import { Dashboard } from '../components';
-import ContentContainer from './ContentContainer'
+import ContentContainer from './ContentContainer';
 
-export default class DashboardContainer extends Component {
-  static propTypes = {
-    prop: PropTypes
-  }
+const DashboardContainer = () => (
+  <Dashboard>
+    <ContentContainer />
+  </Dashboard>
+)
 
-  render() {
-    return (
-      <Dashboard>
-        <ContentContainer />
-      </Dashboard>
-    )
-  }
-}
+export default DashboardContainer;

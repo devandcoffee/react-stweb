@@ -1,3 +1,3 @@
-import SmartTable from './SmartTable'
+import SmartTable from './SmartTable';
 
-export { SmartTable }
+export { SmartTable };

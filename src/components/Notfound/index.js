@@ -1,14 +1,10 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
 
-export default class NotFound extends Component {
-  static propTypes = {
-    prop: PropTypes
-  }
+const NotFound = () => (
+  <h1>
+    Page Not Found
+  </h1>
+)
 
-  render() {
-    return (
-      <h1>Page not found</h1>
-    )
-  }
-}
+export default NotFound;
+
