@@ -93,6 +93,7 @@ class TournamentForm extends Component {
                 'Tournaments',
                 `Tournament ${data.updateTourney.name} updated.`,
               );
+              console('UPDATE', data);
               this.context.router.history.push('/tournaments');
             }).catch(() => {
               NOTIFICATIONS.showNotification(

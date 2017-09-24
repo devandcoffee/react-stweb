@@ -1,89 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { gql, graphql, compose } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import * as FORM_MODES from '../constants/form';
 import { TournamentForm } from '../components';
-
-const getTournament = gql`
-  query getTournament($id: Int!) {
-    tourney(id: $id) {
-      id
-      name
-      amount_teams
-      start_date
-      amount_teams
-      description
-      user {
-        id
-      }
-      tourney_type {
-        id
-        name
-      }
-      updated_at
-    }
-  }
-`;
-
-const getTournamentsTypes = gql`
-  query getTournamentsTypes {
-    tourneysTypes {
-      id
-      name
-      updated_at
-    }
-  }
-`;
-
-const updateTournament = gql`
-  mutation updateTournament($id: Int!, $tourney: EditTourney) {
-    updateTourney(id: $id, tourney: $tourney) {
-      id
-      name
-      description
-      amount_teams
-      start_date
-      user {
-        id
-      }
-      tourney_type {
-        id
-        name
-      }
-      created_at
-      updated_at
-    }
-  }
-`;
-
-const createTournament = gql`
-mutation createTournament($tourney: NewTourney) {
-  createTourney(tourney: $tourney) {
-    id
-    name
-    description
-    amount_teams
-    start_date
-    user {
-      id
-    }
-    tourney_type {
-      id
-      name
-    }
-    created_at
-    updated_at
-  }
-}
-`;
-
-const deleteTournament = gql`
-  mutation deleteTournament($id: Int!) {
-    deleteTourney(id: $id) {
-      name
-    }
-  }
-`;
+import { getTournament, getTournamentsTypes, createTournament, updateTournament, deleteTournament } from '../graphql/tournaments';
 
 const TournamentFormWithData = compose(
   graphql(getTournament, {
@@ -121,6 +41,6 @@ function TournamentFormContainer({ match }) {
 
 TournamentFormContainer.propTypes = {
   match: PropTypes.object.isRequired,
-}
+};
 
 export default TournamentFormContainer;

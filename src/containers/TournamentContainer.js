@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
-import { gql, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import { TournamentList } from '../components';
+import { getTournamentsList } from '../graphql/tournaments';
 import { EDIT_RECORD, REMOVE_RECORD, SHOW_RECORD } from '../shared/SmartTable';
-
-const getTournamentsList = gql`query{
-  tourneys {
-    id,
-    name,
-    description,
-    start_date,
-    amount_teams
-  }
-}`;
 
 const TournamentsWithData = graphql(getTournamentsList)(TournamentList);
 
