@@ -26,7 +26,6 @@ class TournamentForm extends Component {
   static propTypes = {
     form: PropTypes.object.isRequired,
     id: PropTypes.string,
-    getTournament: PropTypes.object,
     getTournamentsTypes: PropTypes.object,
     updateTournament: PropTypes.func.isRequired,
     createTournament: PropTypes.func.isRequired,
@@ -45,24 +44,6 @@ class TournamentForm extends Component {
       title: props.id ? TITLE_EDIT : TITLE_NEW,
       activeRecord: null,
     };
-  }
-
-  componentWillReceiveProps = (nextProps) => {
-    if (nextProps.getTournament.tourney &&
-      nextProps.getTournament.tourney !== this.props.getTournament.tourney
-    ) {
-      const { tourney } = nextProps.getTournament;
-      this.setState({
-        title: `${TITLE_EDIT} ${tourney.name}`,
-      });
-      this.props.form.setFieldsValue({
-        amount_teams: tourney.amount_teams,
-        description: tourney.description,
-        tournament_type_id: tourney.tournament_type_id,
-        name: tourney.name,
-        start_date: moment(new Date(tourney.start_date), DATE_TIME),
-      });
-    }
   }
 
   handleSubmit = (e) => {
@@ -87,13 +68,13 @@ class TournamentForm extends Component {
               NOTIFICATIONS.showNotification(
                 NOTIFICATIONS.NOTIFY_SUCCESS,
                 'Tournaments',
-                `Tournament ${data.name} created.`,
+                `Tournament ${data.updateTourney.name} updated.`,
               );
             }).catch(() => {
               NOTIFICATIONS.showNotification(
                 NOTIFICATIONS.NOTIFY_ERROR,
                 'Tournaments',
-                'There was an error creating the tournament.',
+                'There was an error updating the tournament.',
               );
             });
         } else {
@@ -115,13 +96,13 @@ class TournamentForm extends Component {
               NOTIFICATIONS.showNotification(
                 NOTIFICATIONS.NOTIFY_SUCCESS,
                 'Tournaments',
-                `Tournament ${data.name} updated.`,
+                `Tournament ${data.createTourney.name} created.`,
               );
             }).catch(() => {
               NOTIFICATIONS.showNotification(
                 NOTIFICATIONS.NOTIFY_ERROR,
                 'Tournaments',
-                'There was an error updating the tournament.',
+                'There was an error creating the tournament.',
               );
             });
         }
@@ -129,9 +110,11 @@ class TournamentForm extends Component {
     });
   };
 
-  renderSelectOptions = (data, placeholder, name = 'name') => {
+  renderSelectOptions = (data, placeholder = '', name = 'name') => {
     const options = [];
-    options.push(<Option key={'0'} value={'0'} ><span style={{ color: '#ccc' }}>{placeholder}</span></Option>);
+    if (placeholder) {
+      options.push(<Option key={'0'} value={'0'} ><span style={{ color: '#ccc' }}>{placeholder}</span></Option>);
+    }
     if (data && (data.length > 0)) {
       options.push(data.map(option =>
         (<Option key={option.id} value={option.id} >
@@ -145,13 +128,11 @@ class TournamentForm extends Component {
   render() {
     const { title } = this.state;
     const { getFieldDecorator } = this.props.form;
-
     return (
       <div>
-        <h1> {title} </h1>
         <Row>
           <Card
-            title="New Tournament"
+            title={title}
             bordered={false}
             style={{ width: '100%', marginTop: '25px' }}
           >
@@ -177,7 +158,7 @@ class TournamentForm extends Component {
                       ],
                     })(
                       <Select placeholder="Please select a tournament type.">
-                        {this.renderSelectOptions(this.props.getTournamentsTypes.tourneysTypes, 'Select Tournament Type')}
+                        {this.renderSelectOptions(this.props.getTournamentsTypes.tourneysTypes)}
                       </Select>,
                     )}
                   </FormItem>
@@ -238,6 +219,20 @@ class TournamentForm extends Component {
   }
 }
 
-const WrappedTournamentsForm = Form.create()(TournamentForm);
+const WrappedTournamentsForm = Form.create({
+  mapPropsToFields(props) {
+    const { tourney } = props.getTournament;
+    if (tourney) {
+      return {
+        amount_teams: { value: tourney.amount_teams },
+        description: { value: tourney.description },
+        tourney_type_id: { value: tourney.tourney_type.id },
+        name: { value: tourney.name },
+        start_date: { value: moment(new Date(tourney.start_date), DATE_TIME) },
+      };
+    }
+    return {}
+  },
+})(TournamentForm);
 
 export default WrappedTournamentsForm;
