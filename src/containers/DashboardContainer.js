@@ -1,4 +1,6 @@
 import React from 'react';
+import { LocaleProvider } from 'antd';
+import enUS from 'antd/lib/locale-provider/en_US';
 import { ApolloClient, ApolloProvider, createNetworkInterface } from 'react-apollo';
 import { Dashboard } from '../components';
 import ContentContainer from './ContentContainer';
@@ -12,11 +14,13 @@ const client = new ApolloClient({
 });
 
 const DashboardContainer = () => (
-  <ApolloProvider client={client}>
-    <Dashboard>
-      <ContentContainer />
-    </Dashboard>
-  </ApolloProvider>
+  <LocaleProvider locale={enUS}>
+    <ApolloProvider client={client}>
+      <Dashboard>
+        <ContentContainer />
+      </Dashboard>
+    </ApolloProvider>
+  </LocaleProvider>
 )
 
 export default DashboardContainer;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Layout, Menu } from 'antd';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const { Header, Content, Footer } = Layout;
 
