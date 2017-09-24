@@ -9,26 +9,37 @@ import {
   Input,
   DatePicker,
   InputNumber,
+  Modal,
   Select,
 } from 'antd';
 import moment from 'moment';
+import * as FORM_MODES from '../../constants/form';
 import DATE_TIME from '../../constants/locals';
 import * as NOTIFICATIONS from '../../services/notifications';
 import user from '../../libraries/user';
 
 const Option = Select.Option;
 const FormItem = Form.Item;
+const confirm = Modal.confirm;
 
 const TITLE_NEW = 'New Tournament';
 const TITLE_EDIT = 'Editing Tournament';
+const TITLE_DELETE = 'Deleting Tournament';
+const TITLE_VIEW = 'Viewing Tournament';
 
 class TournamentForm extends Component {
+  static contextTypes = {
+    router: PropTypes.object,
+  };
+
   static propTypes = {
     form: PropTypes.object.isRequired,
     id: PropTypes.string,
+    mode: PropTypes.number.isRequired,
     getTournamentsTypes: PropTypes.object,
     updateTournament: PropTypes.func.isRequired,
     createTournament: PropTypes.func.isRequired,
+    deleteTournament: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -41,9 +52,21 @@ class TournamentForm extends Component {
     super(props);
     this.state = {
       id: props.id,
-      title: props.id ? TITLE_EDIT : TITLE_NEW,
+      title: this.getTitle(props),
       activeRecord: null,
     };
+  }
+
+  getTitle = ({ mode, id }) => {
+    if (mode === FORM_MODES.MODE_EDITION) {
+      return id ? TITLE_EDIT : TITLE_NEW;
+    }
+
+    if (mode === FORM_MODES.MODE_PRESENTATION) {
+      return TITLE_VIEW;
+    }
+
+    return TITLE_DELETE;
   }
 
   handleSubmit = (e) => {
@@ -70,6 +93,7 @@ class TournamentForm extends Component {
                 'Tournaments',
                 `Tournament ${data.updateTourney.name} updated.`,
               );
+              this.context.router.history.push('/tournaments');
             }).catch(() => {
               NOTIFICATIONS.showNotification(
                 NOTIFICATIONS.NOTIFY_ERROR,
@@ -98,6 +122,7 @@ class TournamentForm extends Component {
                 'Tournaments',
                 `Tournament ${data.createTourney.name} created.`,
               );
+              this.context.router.history.push('/tournaments');
             }).catch(() => {
               NOTIFICATIONS.showNotification(
                 NOTIFICATIONS.NOTIFY_ERROR,
@@ -107,6 +132,33 @@ class TournamentForm extends Component {
             });
         }
       }
+    });
+  };
+
+  deleteTournament = () => {
+    const { deleteTournament, id } = this.props;
+    const { router } = this.context;
+    confirm({
+      title: 'Do you want to delete this item?',
+      content: 'When clicked the OK button, the tournament will be deleted.',
+      onOk() {
+        deleteTournament(id)
+          .then(({ data }) => {
+            NOTIFICATIONS.showNotification(
+              NOTIFICATIONS.NOTIFY_SUCCESS,
+              'Tournaments',
+              `Tournament ${data.deleteTourney.name} deleted.`,
+            );
+            router.history.push('/tournaments');
+          }).catch(() => {
+            NOTIFICATIONS.showNotification(
+              NOTIFICATIONS.NOTIFY_ERROR,
+              'Tournaments',
+              'There was an error deleting the tournament.',
+            );
+          });
+      },
+      onCancel() { },
     });
   };
 
@@ -128,6 +180,7 @@ class TournamentForm extends Component {
   render() {
     const { title } = this.state;
     const { getFieldDecorator } = this.props.form;
+    const { mode } = this.props;
     return (
       <div>
         <Row>
@@ -199,18 +252,51 @@ class TournamentForm extends Component {
                 </FormItem>
               </Row>
 
-              <Row>
-                <FormItem>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    size="large"
-                    icon="save"
-                  >
-                    Save
-                  </Button>
-                </FormItem>
-              </Row>
+              {
+                mode === FORM_MODES.MODE_EDITION &&
+                <Row>
+                  <FormItem>
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      size="large"
+                      icon="save"
+                    >
+                      Save
+                    </Button>
+                  </FormItem>
+                </Row>
+              }
+              {
+                mode === FORM_MODES.MODE_DELETION &&
+                <Row>
+                  <FormItem>
+                    <Button
+                      type="danger"
+                      size="large"
+                      icon="delete"
+                      onClick={this.deleteTournament}
+                    >
+                      Delete
+                    </Button>
+                  </FormItem>
+                </Row>
+              }
+              {
+                mode === FORM_MODES.MODE_PRESENTATION &&
+                <Row>
+                  <FormItem>
+                    <Button
+                      type="primary"
+                      size="large"
+                      icon="arrow-left"
+                      onClick={() => this.context.router.history.push('/tournaments')}
+                    >
+                      Back
+                    </Button>
+                  </FormItem>
+                </Row>
+              }
             </Form>
           </Card>
         </Row>
@@ -231,7 +317,7 @@ const WrappedTournamentsForm = Form.create({
         start_date: { value: moment(new Date(tourney.start_date), DATE_TIME) },
       };
     }
-    return {}
+    return {};
   },
 })(TournamentForm);
 

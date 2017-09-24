@@ -29,8 +29,10 @@ export default class TournamentContainer extends Component {
         this.context.router.history.push(`/tournaments/${record.id}`);
         break;
       case REMOVE_RECORD:
+        this.context.router.history.push(`/tournaments/delete/${record.id}`);
         break;
       case SHOW_RECORD:
+        this.context.router.history.push(`/tournaments/view/${record.id}`);
         break;
       default:
         break;

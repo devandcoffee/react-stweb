@@ -16,6 +16,8 @@ const Content = () => {
       <Route exact path="/tournaments" component={TournamentContainer} />
       <Route exact path="/tournaments/new" component={TournamentFormContainer} />
       <Route exact path="/tournaments/:id" component={TournamentFormContainer} />
+      <Route exact path="/tournaments/view/:id" component={TournamentFormContainer} />
+      <Route exact path="/tournaments/delete/:id" component={TournamentFormContainer} />
       <Route component={NotFound} />
     </Switch>
   );
