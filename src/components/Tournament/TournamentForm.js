@@ -12,8 +12,9 @@ import {
   Select,
 } from 'antd';
 import moment from 'moment';
-import user from '../../libraries/user';
 import DATE_TIME from '../../constants/locals';
+import * as NOTIFICATIONS from '../../services/notifications';
+import user from '../../libraries/user';
 
 const Option = Select.Option;
 const FormItem = Form.Item;
@@ -23,6 +24,7 @@ const TITLE_EDIT = 'Editing Tournament';
 
 class TournamentForm extends Component {
   static propTypes = {
+    form: PropTypes.object.isRequired,
     id: PropTypes.string,
     getTournament: PropTypes.object,
     getTournamentsTypes: PropTypes.object,
@@ -68,7 +70,6 @@ class TournamentForm extends Component {
     const { id } = this.state;
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        // this.props.saveTournament(values, id);
         if (id) {
           const editTourney = {
             name: values.name,
@@ -83,9 +84,17 @@ class TournamentForm extends Component {
             },
           })
             .then(({ data }) => {
-              console.log('got data', data);
-            }).catch((error) => {
-              console.log('there was an error sending the query', error);
+              NOTIFICATIONS.showNotification(
+                NOTIFICATIONS.NOTIFY_SUCCESS,
+                'Tournaments',
+                `Tournament ${data.name} created.`,
+              );
+            }).catch(() => {
+              NOTIFICATIONS.showNotification(
+                NOTIFICATIONS.NOTIFY_ERROR,
+                'Tournaments',
+                'There was an error creating the tournament.',
+              );
             });
         } else {
           const newTourney = {
@@ -103,9 +112,17 @@ class TournamentForm extends Component {
             },
           })
             .then(({ data }) => {
-              console.log('got data', data);
-            }).catch((error) => {
-              console.log('there was an error sending the query', error);
+              NOTIFICATIONS.showNotification(
+                NOTIFICATIONS.NOTIFY_SUCCESS,
+                'Tournaments',
+                `Tournament ${data.name} updated.`,
+              );
+            }).catch(() => {
+              NOTIFICATIONS.showNotification(
+                NOTIFICATIONS.NOTIFY_ERROR,
+                'Tournaments',
+                'There was an error updating the tournament.',
+              );
             });
         }
       }
