@@ -65,15 +65,16 @@ class SmartTable extends Component {
 }
 
 SmartTable.defaultProps = {
+  dataSource: [],
   rowKey: '',
   pagination: {},
   handleTableChange: () => { },
-  emit: () => { }
+  emit: () => { },
 };
 
 SmartTable.propTypes = {
   columns: PropTypes.array.isRequired,
-  dataSource: PropTypes.array.isRequired,
+  dataSource: PropTypes.array,
   pagination: PropTypes.object,
   handleTableChange: PropTypes.func,
   emit: PropTypes.func,

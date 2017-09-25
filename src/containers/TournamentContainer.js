@@ -6,7 +6,36 @@ import { TournamentList } from '../components';
 import { getTournamentsList } from '../graphql/tournaments';
 import { EDIT_RECORD, REMOVE_RECORD, SHOW_RECORD } from '../shared/SmartTable';
 
-const TournamentsWithData = graphql(getTournamentsList)(TournamentList);
+const ITEMS_PER_PAGE = 10;
+
+const TournamentsWithData = graphql(getTournamentsList, {
+  options() {
+    return {
+      variables: {
+        offset: 0,
+        limit: ITEMS_PER_PAGE,
+      },
+      fetchPolicy: 'network-only',
+    };
+  },
+  props({ data: { loading, tourneysWithOffset, fetchMore } }) {
+    return {
+      loading,
+      tourneysWithOffset,
+      loadPage(offset) {
+        return fetchMore({
+          variables: {
+            offset,
+          },
+          updateQuery: (previousResult, { fetchMoreResult }) => {
+            if (!fetchMoreResult) { return previousResult; }
+            return fetchMoreResult;
+          },
+        });
+      },
+    };
+  },
+})(TournamentList);
 
 export default class TournamentContainer extends Component {
   static contextTypes = {

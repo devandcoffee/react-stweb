@@ -1,13 +1,19 @@
 import { gql } from 'react-apollo';
 
 export const getTournamentsList = gql`
-  query {
-    tourneys {
-      id,
-      name,
-      description,
-      start_date,
-      amount_teams
+  query getTournamentList($limit: Int!, $offset: Int!) {
+    tourneysWithOffset(limit: $limit, offset: $offset) {
+      tourneys {
+        id,
+        name,
+        description,
+        start_date,
+        amount_teams
+      }
+      metaInfo {
+        totalCount,
+        currentPage
+      }
     }
   }
 `;
