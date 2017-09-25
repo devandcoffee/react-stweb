@@ -49,7 +49,7 @@ class TournamentList extends Component {
 
   handleTableChange = (pagination) => {
     const { loadPage } = this.props;
-    loadPage(pagination.current);
+    loadPage(pagination.current - 1);
   };
 
   render() {
