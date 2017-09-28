@@ -36,7 +36,7 @@ export default class Tournaments extends Component {
       });
     }
     return (
-      <Spin tip="Loading..." spinning={loading}>
+      <Spin tip="Loading..." spinning={loading} size="large">
         <ul style={{ height: 500, overflowY: 'scroll' }} onScroll={e => this.onScroll(e)}>
           {tournamentsList}
         </ul>
