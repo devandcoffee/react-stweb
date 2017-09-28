@@ -1,5 +1,25 @@
 import { gql } from 'react-apollo';
 
+export const getTournaments = gql`
+  query getTournaments($cursor: String) {
+    tourneysWithCursor(first: 10, after: $cursor) {
+      totalCount
+      edges{
+        node {
+          id
+          name
+          description
+        }
+        cursor
+      }
+      pageInfo{
+        endCursor
+        hasNextPage
+      }
+    }
+  }
+`;
+
 export const getTournamentsList = gql`
   query getTournamentList($limit: Int!, $offset: Int!) {
     tourneysWithOffset(limit: $limit, offset: $offset) {

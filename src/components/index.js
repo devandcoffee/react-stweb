@@ -2,7 +2,7 @@ import Dashboard from './Dashboard';
 import Home from './Home';
 import Login from './Login';
 import NotFound from './Notfound';
-import { TournamentForm, TournamentList } from './Tournament';
+import { TournamentForm, TournamentList, Tournaments } from './Tournament';
 import { TeamForm, TeamsList } from './Teams';
 
 export {
@@ -14,4 +14,5 @@ export {
   TeamsList,
   TournamentForm,
   TournamentList,
+  Tournaments,
 };
