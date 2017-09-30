@@ -1,9 +1,9 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
-import { Tournaments } from '../components';
+import { TournamentsList } from '../components';
 import { getTournaments } from '../graphql/tournaments';
 
-const TournamentsWithData = graphql(getTournaments, {
+const TournamentsListWithData = graphql(getTournaments, {
   options: {
     notifyOnNetworkStatusChange: true,
   },
@@ -33,12 +33,12 @@ const TournamentsWithData = graphql(getTournaments, {
       },
     };
   },
-})(Tournaments);
+})(TournamentsList);
 
 export default () => {
   return (
     <div>
-      <TournamentsWithData />
+      <TournamentsListWithData />
     </div>
   )
 }

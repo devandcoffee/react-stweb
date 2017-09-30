@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Card, Spin } from 'antd';
 
-export default class Tournaments extends Component {
+export default class TournamentsList extends Component {
   static propTypes = {
     loadMoreTournaments: PropTypes.func.isRequired,
     tourneysWithCursor: PropTypes.object,
