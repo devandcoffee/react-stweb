@@ -2,7 +2,7 @@ import Dashboard from './Dashboard';
 import Home from './Home';
 import Login from './Login';
 import NotFound from './Notfound';
-import { TournamentForm, TournamentList, Tournaments } from './Tournament';
+import { TournamentForm, TournamentsTable, Tournaments } from './Tournament';
 import { TeamForm, TeamsList } from './Teams';
 
 export {
@@ -13,6 +13,6 @@ export {
   TeamForm,
   TeamsList,
   TournamentForm,
-  TournamentList,
+  TournamentsTable,
   Tournaments,
 };

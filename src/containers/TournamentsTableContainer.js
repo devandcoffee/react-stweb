@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
 import { graphql } from 'react-apollo';
-import { TournamentList } from '../components';
+import { TournamentsTable } from '../components';
 import { getTournamentsList } from '../graphql/tournaments';
 import { EDIT_RECORD, REMOVE_RECORD, SHOW_RECORD } from '../shared/SmartTable';
 
@@ -35,13 +35,12 @@ const TournamentsWithData = graphql(getTournamentsList, {
       },
     };
   },
-})(TournamentList);
+})(TournamentsTable);
 
-export default class TournamentContainer extends Component {
+export default class TournamentsTableContainer extends Component {
   static contextTypes = {
     router: PropTypes.object,
   };
-
 
   emit = (text, record, index, action) => {
     switch (action) {

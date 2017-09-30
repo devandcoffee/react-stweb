@@ -27,7 +27,7 @@ const columns = [
 ];
 
 
-class TournamentList extends Component {
+class TournamentsTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,14 +68,14 @@ class TournamentList extends Component {
   }
 }
 
-TournamentList.defaultProps = {
+TournamentsTable.defaultProps = {
   tourneysWithOffset: {},
 }
 
-TournamentList.propTypes = {
+TournamentsTable.propTypes = {
   tourneysWithOffset: PropTypes.object,
   emit: PropTypes.func.isRequired,
   loadPage: PropTypes.func.isRequired,
 }
 
-export default TournamentList;
+export default TournamentsTable;

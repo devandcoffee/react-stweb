@@ -1,5 +1,5 @@
 import TournamentForm from './TournamentForm';
-import TournamentList from './TournamentList';
+import TournamentsTable from './TournamentsTable';
 import Tournaments from './Tournaments';
 
-export { TournamentForm, TournamentList, Tournaments };
+export { TournamentForm, TournamentsTable, Tournaments };
