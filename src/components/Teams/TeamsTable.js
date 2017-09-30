@@ -16,7 +16,7 @@ const columns = [
   },
 ];
 
-const TeamsList = ({ data, emit }) => {
+const TeamsTable = ({ data, emit }) => {
   return (
     <SmartTable
       dataSource={data.teams ? data.teams : []}
@@ -27,13 +27,13 @@ const TeamsList = ({ data, emit }) => {
   )
 }
 
-TeamsList.defaultProps = {
+TeamsTable.defaultProps = {
   data: {},
 }
 
-TeamsList.propTypes = {
+TeamsTable.propTypes = {
   data: PropTypes.object,
   emit: PropTypes.func.isRequired,
 }
 
-export default TeamsList;
+export default TeamsTable;

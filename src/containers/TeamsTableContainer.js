@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
 import { graphql } from 'react-apollo';
-import { TeamsList } from '../components';
+import { TeamsTable } from '../components';
 import { getTeamsList } from '../graphql/teams';
 import { EDIT_RECORD, REMOVE_RECORD, SHOW_RECORD } from '../shared/SmartTable';
 
-const TeamsWithData = graphql(getTeamsList)(TeamsList);
+const TeamsWithData = graphql(getTeamsList)(TeamsTable);
 
 export default class TeamsContainer extends Component {
   static contextTypes = {

@@ -1,7 +1,7 @@
-import TeamsList from './TeamsList';
 import TeamForm from './TeamForm';
+import TeamsTable from './TeamsTable';
 
 export {
   TeamForm,
-  TeamsList,
+  TeamsTable,
 };

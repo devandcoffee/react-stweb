@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import { NotFound } from '../components';
 import HomeContainer from './HomeContainer';
-import TeamsContainer from './TeamsContainer';
+import TeamsTableContainer from './TeamsTableContainer';
 import TeamFormContainer from './TeamFormContainer';
 import TournamentsTableContainer from './TournamentsTableContainer';
 import TournamentFormContainer from './TournamentFormContainer';
@@ -16,7 +16,7 @@ const Content = () => {
   return (
     <Switch>
       <Route exact path="/" component={HomeContainer} />
-      <Route exact path="/teams" component={TeamsContainer} />
+      <Route exact path="/teams" component={TeamsTableContainer} />
       <Route exact path="/teams/new" component={TeamFormContainer} />
       <Route exact path="/teams/:id" component={TeamFormContainer} />
       <Route exact path="/teams/view/:id" component={TeamFormContainer} />
