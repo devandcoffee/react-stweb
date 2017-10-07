@@ -19,3 +19,4 @@ package-lock.json
 
 # firebase Config
 src/config/firebaseConfig.js
+src/config/firebaseConfig.sample.js
