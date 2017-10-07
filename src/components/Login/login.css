@@ -1,0 +1,14 @@
+.login-container{
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(0,0,0,1)), color-stop(79%, rgba(191,113,40,1)), color-stop(100%, rgba(191,113,40,1)));
+}
+
+.login-card{
+  width: 400px;
+  margin: 250px;
+}

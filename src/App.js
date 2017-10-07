@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { LoginContainer, DashboardContainer } from './containers';
 
-import './App.css';
+import './app.css';
 
 class App extends Component {
   render() {

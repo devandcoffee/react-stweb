@@ -16,3 +16,6 @@ npm-debug.log
 
 # npm 5
 package-lock.json
+
+# firebase Config
+src/config/firebaseConfig.js
