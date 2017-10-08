@@ -4,22 +4,21 @@ import { Card, Form, Icon, Input, Button } from 'antd';
 import * as firebase from 'firebase';
 import * as NOTIFICATIONS from '../../services/notifications';
 
-import './login.css';
+import './signup.css';
 
 const FormItem = Form.Item;
 
-class LoginForm extends Component {
+class SignUpForm extends Component {
   static propTypes = {
     form: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    goToSignUp: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
-    };
+    }
   }
 
   handleSubmit = (e) => {
@@ -28,7 +27,7 @@ class LoginForm extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         firebase.auth()
-          .signInWithEmailAndPassword(values.email, values.password)
+          .createUserWithEmailAndPassword(values.email, values.password)
           .then(() => {
             this.setState({ loading: false })
             this.props.handleSubmit();
@@ -44,13 +43,12 @@ class LoginForm extends Component {
   }
 
   render() {
-    const { goToSignUp } = this.props;
     const { getFieldDecorator } = this.props.form;
     const { loading } = this.state;
     return (
-      <div className="login-container">
-        <Card className="login-card" title={'Login'}>
-          <Form onSubmit={this.handleSubmit} className="login-form">
+      <div className="signup-container">
+        <Card className="signup-card" title={'Sign Up'}>
+          <Form onSubmit={this.handleSubmit} className="signup-form">
             <FormItem>
               {getFieldDecorator('email', {
                 rules: [{ required: true, message: 'Please input your email!' }],
@@ -74,10 +72,7 @@ class LoginForm extends Component {
               )}
             </FormItem>
             <FormItem>
-              <Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
-                Log in
-              </Button>
-              <Button type="primary" ghost className="signup-form-button" onClick={goToSignUp}>
+              <Button type="primary" htmlType="submit" className="signup-form-button" loading={loading}>
                 Sign Up
               </Button>
             </FormItem>
@@ -88,6 +83,6 @@ class LoginForm extends Component {
   }
 }
 
-const WrappedLoginForm = Form.create()(LoginForm);
+const WrappedSignUpForm = Form.create()(SignUpForm);
 
-export default WrappedLoginForm;
+export default WrappedSignUpForm;

@@ -1,15 +1,9 @@
-import ContentContainer from './ContentContainer';
 import DashboardContainer from './DashboardContainer';
 import LoginContainer from './LoginContainer';
-import TeamsTableContainer from './TeamsTableContainer';
-import TournamentsListContainer from './TournamentsListContainer';
-import TournamentsTableContainer from './TournamentsTableContainer';
+import SignUpFormContainer from './SignUpFormContainer';
 
 export {
-  ContentContainer,
   DashboardContainer,
   LoginContainer,
-  TeamsTableContainer,
-  TournamentsListContainer,
-  TournamentsTableContainer,
+  SignUpFormContainer,
 };
